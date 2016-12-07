@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface WordRepository extends CrudRepository<Word, Long> {
     List<Word> findByGroupId(long groupId);
+
 }
 

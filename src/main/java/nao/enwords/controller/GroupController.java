@@ -3,9 +3,7 @@ package nao.enwords.controller;
 import nao.enwords.model.Group;
 import nao.enwords.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +20,22 @@ public class GroupController {
     @RequestMapping(value = "/groups", method = RequestMethod.GET, produces = "application/json")
     public List<Group> groups() {
         return groupRepository.findAll();
+    }
+
+    @RequestMapping(value = "/groups/{groupId}", method = RequestMethod.GET, produces = "application/json")
+    public Group group(@PathVariable long groupId) {
+        return groupRepository.findOne(groupId);
+    }
+
+    @RequestMapping(value = "/groups/{groupId}", method = RequestMethod.DELETE, produces = "application/json")
+    public void delete(@PathVariable long groupId) {
+        groupRepository.delete(groupId);
+    }
+
+    @RequestMapping(value = "/groups", method = RequestMethod.POST,
+            produces = "application/json", consumes = "application/json")
+    public void save(@RequestBody Group group) {
+        groupRepository.save(group);
     }
 
 }

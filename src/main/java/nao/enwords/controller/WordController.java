@@ -3,10 +3,7 @@ package nao.enwords.controller;
 import nao.enwords.model.Word;
 import nao.enwords.repository.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,23 @@ public class WordController {
     @RequestMapping(value = "/words/{groupId}", method = RequestMethod.GET, produces = "application/json")
     public List<Word> words(@PathVariable long groupId) {
         return wordRepository.findByGroupId(groupId);
+    }
+
+
+    @RequestMapping(value = "/words/info/{wordId}", method = RequestMethod.GET, produces = "application/json")
+    public Word word(@PathVariable long wordId) {
+        return wordRepository.findOne(wordId);
+    }
+
+    @RequestMapping(value = "/words/info/{wordId}", method = RequestMethod.DELETE, produces = "application/json")
+    public void delete(@PathVariable long wordId) {
+        wordRepository.delete(wordId);
+    }
+
+    @RequestMapping(value = "/words/info", method = RequestMethod.POST,
+            produces = "application/json", consumes = "application/json")
+    public Word save(@RequestBody Word word) {
+        return wordRepository.save(word);
     }
 
 }
