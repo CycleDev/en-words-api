@@ -8,18 +8,18 @@ public class Word {
 
     @Id
     @GeneratedValue(strategy= GenerationType.TABLE)
+    @Column(name = "word_id")
     private long id;
     private String word;
     private String translation;
     private String comments;
-    @Column(name = "groupid")
+
+    @Column(name = "group_id")
     private long groupId;
 
-    public Word() {
-    }
+    protected Word() {}
 
-    public Word(long id, String word, String translation, String comments, long groupId) {
-        this.id = id;
+    public Word(String word, String translation, String comments, long groupId) {
         this.word = word;
         this.translation = translation;
         this.comments = comments;

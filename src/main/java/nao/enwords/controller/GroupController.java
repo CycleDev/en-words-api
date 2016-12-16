@@ -32,10 +32,8 @@ public class GroupController {
         groupRepository.delete(groupId);
     }
 
-    @RequestMapping(value = "/groups", method = RequestMethod.POST,
-            produces = "application/json", consumes = "application/json")
-    public void save(@RequestBody Group group) {
-        groupRepository.save(group);
+    @RequestMapping(value = "/groups", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public Group save(@RequestBody Group group) {
+        return groupRepository.save(group);
     }
-
 }
