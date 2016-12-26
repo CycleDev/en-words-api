@@ -33,6 +33,13 @@ public class WordController {
         wordRepository.delete(wordId);
     }
 
+    @RequestMapping(value = "/words", method = RequestMethod.DELETE, produces = "application/json")
+    public void deleteWordsByGroup(@RequestParam long groupId) {
+        List<Word> words = wordRepository.findByGroupId(groupId);
+
+        wordRepository.delete(words);
+    }
+
     @RequestMapping(value = "/words", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public Word create(@RequestBody Word word) {
         return wordRepository.save(word);
@@ -48,5 +55,4 @@ public class WordController {
 
         return wordRepository.save(word);
     }
-
 }
