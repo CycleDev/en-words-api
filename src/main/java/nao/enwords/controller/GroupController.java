@@ -34,7 +34,18 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/groups", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public Group save(@RequestBody Group group) {
+    public Group create(@RequestBody Group group) {
+        return groupRepository.save(group);
+    }
+
+    @RequestMapping(value = "/groups/{groupId}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public Group update(@PathVariable long groupId, @RequestBody Group group) {
+        Group groupInfo = groupRepository.findOne(groupId);
+
+        if (groupInfo == null) {
+            throw new IllegalArgumentException("Group doesn't exist.");
+        }
+
         return groupRepository.save(group);
     }
 }

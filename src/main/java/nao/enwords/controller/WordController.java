@@ -23,7 +23,6 @@ public class WordController {
         return wordRepository.findByGroupId(groupId);
     }
 
-
     @RequestMapping(value = "/words/{wordId}", method = RequestMethod.GET, produces = "application/json")
     public Word word(@PathVariable long wordId) {
         return wordRepository.findOne(wordId);
@@ -35,7 +34,19 @@ public class WordController {
     }
 
     @RequestMapping(value = "/words", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public Word save(@RequestBody Word word) {
+    public Word create(@RequestBody Word word) {
         return wordRepository.save(word);
     }
+
+    @RequestMapping(value = "/words/{wordId}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public Word update(@PathVariable long wordId, @RequestBody Word word) {
+        Word wordInfo = wordRepository.findOne(wordId);
+
+        if (wordInfo == null) {
+            throw new IllegalArgumentException("Word doesn't exist.");
+        }
+
+        return wordRepository.save(word);
+    }
+
 }
