@@ -34,7 +34,7 @@ public class WordController {
     }
 
     @RequestMapping(value = "/words", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteWordsByGroup(@RequestParam long groupId) {
+    public void deleteWordsByGroup(@RequestParam(name = "groupId") long groupId) {
         List<Word> words = wordRepository.findByGroupId(groupId);
 
         wordRepository.delete(words);
