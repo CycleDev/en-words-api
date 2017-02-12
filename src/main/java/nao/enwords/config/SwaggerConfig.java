@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(new ApiInfoBuilder()
                         .title("En-Words REST API")
-                        .version("Version 0.2")
+                        .version("Version 0.3")
                         .build());
     }
 }

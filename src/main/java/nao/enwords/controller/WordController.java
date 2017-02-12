@@ -23,6 +23,12 @@ public class WordController {
         return wordRepository.findByGroupId(groupId);
     }
 
+    @RequestMapping(value = "/words/search", method = RequestMethod.GET, produces = "application/json")
+    public List<Word> wordsSearch(@RequestParam(name = "groupId") long groupId,
+                                  @RequestParam(name = "searchText") String searchText) {
+        return wordRepository.findByGroupIdAndWordContaining(groupId, searchText);
+    }
+
     @RequestMapping(value = "/words/{wordId}", method = RequestMethod.GET, produces = "application/json")
     public Word word(@PathVariable long wordId) {
         return wordRepository.findOne(wordId);
