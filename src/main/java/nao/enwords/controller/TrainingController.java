@@ -5,7 +5,6 @@ import nao.enwords.repository.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,6 +28,11 @@ public class TrainingController {
     public Training create(@RequestBody Training training) {
         training.setTrainingDate(LocalDateTime.now());
         return trainingRepository.save(training);
+    }
+
+    @RequestMapping(value = "/trainings/{trainingId}", method = RequestMethod.DELETE, produces = "application/json")
+    public void delete(@PathVariable long trainingId) {
+        trainingRepository.delete(trainingId);
     }
 
 }
